@@ -1,24 +1,28 @@
-let gauche = document.getElementById("gauche");
-let droite = document.getElementById("droite");
-let texteGauche = document.getElementById("texteGauche")
-let texteDroite = document.getElementById("texteDroite")
-const slide = [
-    {"img1" : "c'est l'image 1"},
-    {"img2":"c'est l'image 2"}
-]
+let slideIndex = 1;
+showSlides(slideIndex);
 
-function clickGauche() {
-    texteGauche.innerHTML = "Ta cliquer sur la Gauche";
-    console.log("Le gauche fonctionne")   
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
 }
 
-function clickDroite() {
-    texteDroite.innerHTML = "Ta cliquer sur la Droite";
-    console.log("Le droite fonctionne")   
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
 }
 
-
-let functionGauche = gauche.addEventListener("click", clickGauche);
-let functionDroite =droite.addEventListener("click", clickDroite);
-
-
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1} 
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none"; 
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block"; 
+  dots[slideIndex-1].className += " active";
+}
